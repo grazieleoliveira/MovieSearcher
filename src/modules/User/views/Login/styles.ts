@@ -1,6 +1,7 @@
 import styled from 'styled-components/native';
-import MyInput from '~/shared/components/Input';
+import Input from '~/shared/components/Input';
 import NewText from '~/shared/components/Text';
+import { s } from '~/shared/utils/responsibleText';
 
 export const Background = styled.KeyboardAvoidingView`
   flex: 1;
@@ -30,11 +31,14 @@ export const Title = styled(NewText)`
   color: ${({ theme }) => theme.Colors.TITLE_FONT};
   padding-top: 50px;
   font-family: Roboto-Medium;
+  align-self: center;
 `;
 
 export const Subtitle = styled(NewText)`
   font-family: Roboto-Regular;
   color: ${({ theme }) => theme.Colors.SUBTITLE};
+  align-self: center;
+  padding-bottom: ${s(20)}px;
 `;
 
 export const InputContainer = styled.View`
@@ -44,7 +48,7 @@ export const InputContainer = styled.View`
 `;
 export const UserInput = styled.TextInput`
   border-bottom-width: 1;
-  border-color: ${({ theme }) => theme.Colors.BORDER};
+  border-color: ${({ theme }) => theme.Colors.INPUT_COLOR};
   padding: 6px;
   color: ${({ theme }) => theme.Colors.FONT_HOME};
 `;
@@ -60,6 +64,6 @@ export const ButtonContainer = styled.View`
   width: 150;
 `;
 
-export const MyInputStyled = styled(MyInput)`
+export const MyInputStyled = styled(Input)`
   color: ${({ theme }) => theme.Colors.FONT_HOME};
 `;

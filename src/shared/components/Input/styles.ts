@@ -36,7 +36,7 @@ export const UserInput = styled.TextInput.attrs<TextInputProps>(
 
 export const InputLine = styled.View`
   border-bottom-width: 1;
-  border-color: ${({ theme }) => theme.Colors.BORDER};
+  border-color: ${({ theme }) => theme.Colors.INPUT_COLOR};
 `;
 
 export const UserInputTitle = styled(NewText)`
@@ -54,7 +54,7 @@ export const IconInput = styled(Icon).attrs<IconInputProps>(
     type: iconType,
   }),
 )<IconInputProps>`
-  color: ${({ iconColor, theme }) => iconColor || theme.Colors.BORDER};
+  color: ${({ iconColor, theme }) => iconColor || theme.Colors.INPUT_COLOR};
   align-self: flex-end;
 `;
 

@@ -40,9 +40,9 @@ export function Login() {
   return (
     <S.Background behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
       <S.Container>
-        <S.Title fontSize={36 + delta}>Welcome</S.Title>
+        <S.Title fontSize={36 + delta}>Movie Searcher</S.Title>
         <S.Subtitle fontSize={14 + delta}>
-          Log in to start searching for your books.
+          Log in to start searching for your movies.
         </S.Subtitle>
         <S.InputContainer>
           <S.MyInputStyled
