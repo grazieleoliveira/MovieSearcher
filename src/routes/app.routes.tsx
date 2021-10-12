@@ -3,6 +3,7 @@ import {createStackNavigator} from '@react-navigation/stack/';
 import { HOME } from '../shared/constants/routeNames';
 import themes from '../shared/themes';
 import App from '~/modules/Movies/view';
+import Header from '~/shared/components/Header';
 
 const Stack = createStackNavigator();
 
@@ -14,14 +15,13 @@ export function AppRoutes() {
         cardStyle: {
           backgroundColor: themes.light.Colors.WHITE,
         },
-        headerShown: false,
       }}>
       <Stack.Screen
         name={HOME}
         component={App}
-        // options={{
-        //   header: () => <Header />,
-        // }}
+        options={{
+          header: () => <Header />,
+        }}
       />
     </Stack.Navigator>
   );
