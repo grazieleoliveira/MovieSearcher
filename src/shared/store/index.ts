@@ -11,13 +11,14 @@ import sagas from './sagas';
 
 import { FontState } from '~/shared/store/ducks/font/types';
 import { ThemeState } from '~/shared/store/ducks/theme/types';
+import { ProfileState } from '~/modules/User/store/ducks/types';
 // import { ProfileState } from './ducks/profile/types';
 // import { BooksState } from './ducks/books/types';
 
 export interface ApplicationState {
   font: FontState;
   theme: ThemeState;
-  // profile: ProfileState;
+  profile: ProfileState;
   // movies: MoviesState;
 }
 

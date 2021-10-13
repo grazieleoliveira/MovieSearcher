@@ -4,26 +4,20 @@ import { Platform } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import ButtonGlobal from '~/shared/components/ButtonGlobal';
-import { HOME, PROFILE } from '~/shared/constants/routeNames';
+import { PROFILE } from '~/shared/constants/routeNames';
 import { ApplicationState } from '~/shared/store';
 import validationSchema from './validations';
 
 import * as S from './styles';
-
-interface DataFormProps {
-  username: string;
-  password: string;
-}
+import { loginAction } from '~/modules/User/store/ducks/actions';
 
 export function Login() {
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
   const [showPassword, setShowPassword] = useState(false);
-
-  const login = (data: DataFormProps) => {
-    // dispatch(loginAction(data.username, data.password));
-    navigation.navigate(PROFILE);
+  const login = () => {
+    dispatch(loginAction());
   };
 
   const { handleSubmit, dirty, handleChange, values, errors } = useFormik({

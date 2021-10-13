@@ -13,9 +13,8 @@ export function Routes() {
   return (
     <ThemeProvider theme={createTheme(theme)}>
       <S.StatusBar translucent={false} barStyle="dark-content" />
-      <NavigationContainer>
-        <AppRoutes />
-      </NavigationContainer>
+
+      <AppRoutes />
     </ThemeProvider>
   );
 }
