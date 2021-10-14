@@ -2,13 +2,14 @@ import React, { useEffect } from 'react';
 import { createStackNavigator } from '@react-navigation/stack/';
 import { useSelector } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
+import { PersistGate } from 'redux-persist/integration/react';
 import { HOME, LOGIN, PROFILE } from '../shared/constants/routeNames';
 import themes from '../shared/themes';
 import Header from '~/shared/components/Header';
 import { Login } from '~/modules/User/views/Login';
-import { Profile } from '~/modules/User/views/Profile';
+import Profile from '~/modules/User/views/Profile';
 import { ApplicationState, persistor } from '~/shared/store';
-import { PersistGate } from 'redux-persist/integration/react';
+import { Home } from '~/modules/Movies/view';
 
 const Stack = createStackNavigator();
 
@@ -52,6 +53,13 @@ export function AppRoutes() {
             <Stack.Screen
               name={PROFILE}
               component={Profile}
+              options={{
+                header: () => <Header />,
+              }}
+            />
+            <Stack.Screen
+              name={HOME}
+              component={Home}
               options={{
                 header: () => <Header />,
               }}

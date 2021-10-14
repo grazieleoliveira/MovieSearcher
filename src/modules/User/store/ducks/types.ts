@@ -7,11 +7,12 @@ export enum ProfileTypes {
 }
 
 export interface UserProps {
-  fullName: string;
-  age: string;
-  favBook: string;
-  currentlyReading: string;
+  name: string;
+  surname: string;
+  dob: string;
+  address: string;
   image: string;
+  gender: string;
 }
 
 export interface ProfileState {

@@ -4,11 +4,12 @@ import { ProfileState, ProfileTypes } from './types';
 const INITIAL_STATE: ProfileState = {
   isLoggedIn: false,
   currentUser: {
-    fullName: '',
-    age: '',
-    favBook: '',
-    currentlyReading: '',
+    name: '',
+    surname: '',
+    dob: '',
+    address: '',
     image: '',
+    gender: '',
   },
 };
 
