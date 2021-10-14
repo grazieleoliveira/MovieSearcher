@@ -32,6 +32,7 @@ export const UserInput = styled.TextInput.attrs<TextInputProps>(
 )<TextInputProps>`
   width: ${({ iconRight }) => (iconRight ? 90 : 100)}%;
   padding: 6px;
+  color: ${({ theme }) => theme.Colors.FONT_HOME};
 `;
 
 export const InputLine = styled.View`

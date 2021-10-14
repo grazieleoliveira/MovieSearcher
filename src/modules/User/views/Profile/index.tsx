@@ -12,6 +12,22 @@ import ModalOptionsCamera from '~/modules/User/components/ModalOptionsCamera';
 
 import * as S from './styles';
 import validationSchema from './validations';
+import RadioButtonList from '~/shared/components/RadioButton/RadioButtonList';
+
+const genders = [
+  {
+    id: 1,
+    gender: 'Male',
+  },
+  {
+    id: 2,
+    gender: 'Female',
+  },
+  {
+    id: 3,
+    gender: 'Other',
+  },
+];
 
 interface DataProps {
   name: string;
@@ -94,11 +110,13 @@ const Profile: React.FC = () => {
         onChangeText={handleChange('surname')}
         error={errors.surname}
       />
-      <Input
+      <RadioButtonList
         label="Gender"
-        value={values.gender}
-        onChangeText={handleChange('gender')}
-        error={errors.gender}
+        selected={values.gender}
+        checkRadio={(value) => {
+          setFieldValue('gender', value);
+        }}
+        data={genders}
       />
       <Input
         label="Birthdate"
