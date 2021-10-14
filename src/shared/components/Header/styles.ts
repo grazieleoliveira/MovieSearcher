@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-import { sfs, vs } from '~/shared/utils/responsibleText';
+import { s, sfs, vs } from '~/shared/utils/responsibleText';
 
 import Icon from '~/shared/components/Icon';
 import Text from '~/shared/components/Text';
@@ -16,7 +16,10 @@ export const Container = styled.View`
 `;
 
 export const ContainerFont = styled.View`
+  flex: 1;
   flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
 `;
 
 export const RestoreFont = styled(Text).attrs({
@@ -39,6 +42,15 @@ export const Button = styled.TouchableOpacity``;
 
 export const IconColor = styled(Icon).attrs(({ theme }) => ({
   name: 'invert-colors',
+  size: theme.Sizes.ICON_SIZE,
+}))`
+  color: ${({ theme }) => theme.Colors.DEFAULT_FONT};
+  margin-right: ${s(16)}px;
+`;
+
+export const BackIcon = styled(Icon).attrs(({ theme }) => ({
+  name: 'arrow-back',
+  type: 'ionicons',
   size: theme.Sizes.ICON_SIZE,
 }))`
   color: ${({ theme }) => theme.Colors.DEFAULT_FONT};

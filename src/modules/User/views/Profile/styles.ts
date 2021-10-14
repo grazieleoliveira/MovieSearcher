@@ -63,9 +63,8 @@ export const Image = styled.Image`
 
 export const ButtonContainer = styled.View`
   flex: 1;
-  justify-content: flex-end;
-  align-self: center;
-  width: 150;
-  padding-top: 32px;
-  padding-bottom: 32px;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding-top: ${vs(28)}px;
+  padding-bottom: ${vs(28)}px;
 `;

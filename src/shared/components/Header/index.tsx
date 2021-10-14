@@ -1,4 +1,5 @@
-import React from 'react';
+import { useNavigation } from '@react-navigation/core';
+import React, { PropsWithChildren } from 'react';
 import { useDispatch } from 'react-redux';
 
 import {
@@ -10,15 +11,29 @@ import { toogleTheme } from '~/shared/store/ducks/theme/actions';
 
 import * as S from './styles';
 
-const Header: React.FC = () => {
-  const dispatch = useDispatch();
+interface HeaderProps {
+  goBackToLast: boolean;
+}
 
+export const Header: React.FC<HeaderProps> = ({ goBackToLast }) => {
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
+  console.tron.log('GOBACK', goBackToLast);
+
+  const onGoBack = () => {
+    navigation.goBack();
+  };
   return (
     <S.Container>
-      <S.Button onPress={() => dispatch(toogleTheme())}>
-        <S.IconColor />
-      </S.Button>
+      {goBackToLast && (
+        <S.Button onPress={() => onGoBack()}>
+          <S.BackIcon />
+        </S.Button>
+      )}
       <S.ContainerFont>
+        <S.Button onPress={() => dispatch(toogleTheme())}>
+          <S.IconColor />
+        </S.Button>
         <S.Button onPress={() => dispatch(decrementFontSize())}>
           <S.DecreaseIncreaseFont>A-</S.DecreaseIncreaseFont>
         </S.Button>
@@ -36,5 +51,3 @@ const Header: React.FC = () => {
 export const headerOption = {
   header: (props: any) => <Header {...props} />,
 };
-
-export default Header;

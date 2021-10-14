@@ -7,7 +7,10 @@ import ButtonGlobal from '../../../../shared/components/ButtonGlobal';
 import Input from '~/shared/components/Input';
 import { HOME } from '../../../../shared/constants/routeNames';
 import { ApplicationState } from '~/shared/store';
-import { setProfileAction } from '~/modules/User/store/ducks/actions';
+import {
+  logoutAction,
+  setProfileAction,
+} from '~/modules/User/store/ducks/actions';
 import ModalOptionsCamera from '~/modules/User/components/ModalOptionsCamera';
 import { mask } from '~/modules/User/utils/masks';
 
@@ -63,6 +66,10 @@ const Profile: React.FC = () => {
     );
 
     navigation.navigate(HOME);
+  };
+
+  const logout = () => {
+    dispatch(logoutAction());
   };
 
   const { handleSubmit, dirty, handleChange, values, errors, setFieldValue } =
@@ -134,7 +141,12 @@ const Profile: React.FC = () => {
         error={errors.address}
       />
       <S.ButtonContainer>
-        <ButtonGlobal disabled={!dirty} action={handleSubmit} title="Salvar" />
+        <ButtonGlobal
+          disabled={!dirty}
+          action={handleSubmit}
+          title=" Salvar "
+        />
+        <ButtonGlobal action={logout} title="Logout" />
       </S.ButtonContainer>
       <Modal
         transparent
