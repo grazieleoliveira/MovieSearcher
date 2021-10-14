@@ -9,6 +9,7 @@ import { HOME } from '../../../../shared/constants/routeNames';
 import { ApplicationState } from '~/shared/store';
 import { setProfileAction } from '~/modules/User/store/ducks/actions';
 import ModalOptionsCamera from '~/modules/User/components/ModalOptionsCamera';
+import { mask } from '~/modules/User/utils/masks';
 
 import * as S from './styles';
 import validationSchema from './validations';
@@ -121,7 +122,9 @@ const Profile: React.FC = () => {
       <Input
         label="Birthdate"
         value={values.dob}
-        onChangeText={handleChange('dob')}
+        onChangeText={(value) => {
+          setFieldValue('dob', value ? mask.birthdate(value) : value);
+        }}
         error={errors.dob}
       />
       <Input
