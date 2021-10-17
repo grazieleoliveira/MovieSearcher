@@ -3,13 +3,21 @@ import { createStackNavigator } from '@react-navigation/stack/';
 import { useSelector } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
 import { PersistGate } from 'redux-persist/integration/react';
-import { HOME, LOGIN, PROFILE } from '../shared/constants/routeNames';
+import {
+  HOME,
+  LOGIN,
+  MOVIE_INFO,
+  PROFILE,
+  TABS,
+} from '../shared/constants/routeNames';
 import themes from '../shared/themes';
 import { Header } from '~/shared/components/Header';
 import { Login } from '~/modules/User/views/Login';
 import Profile from '~/modules/User/views/Profile';
 import { ApplicationState, persistor } from '~/shared/store';
-import { Home } from '~/modules/Movies/view';
+import { Home } from '~/modules/Movies/views/Home';
+import Tabs from './tabNavigators';
+import { MovieInfo } from '~/modules/Movies/views/MovieInfo';
 
 const Stack = createStackNavigator();
 
@@ -43,13 +51,14 @@ export function AppRoutes() {
             />
           </Stack.Navigator>
         ) : (
-          <Stack.Navigator
-            initialRouteName={PROFILE}
-            screenOptions={{
-              cardStyle: {
-                backgroundColor: themes.light.Colors.WHITE,
-              },
-            }}>
+          <Stack.Navigator>
+            <Stack.Screen
+              name={TABS}
+              component={Tabs}
+              options={{
+                header: () => <Header goBackToLast={false} />,
+              }}
+            />
             <Stack.Screen
               name={PROFILE}
               component={Profile}
@@ -58,10 +67,10 @@ export function AppRoutes() {
               }}
             />
             <Stack.Screen
-              name={HOME}
-              component={Home}
+              name={MOVIE_INFO}
+              component={MovieInfo}
               options={{
-                header: () => <Header goBackToLast={false} />,
+                header: () => <Header goBackToLast />,
               }}
             />
           </Stack.Navigator>

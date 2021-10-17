@@ -61,7 +61,7 @@ export const UserInputTitle = styled(NewText)`
 
 export const ButtonContainer = styled.View`
   align-self: center;
-  width: 150;
+  width: 150px;
 `;
 
 export const MyInputStyled = styled(Input)`

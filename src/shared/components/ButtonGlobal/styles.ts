@@ -64,9 +64,9 @@ export const Button = styled(Pressable).attrs<ButtonProps>(
       ? theme.Colors.GRANITE
       : buttonType === 'outline'
       ? 'transparent'
-      : theme.Colors.INPUT_COLOR};
+      : theme.Colors.BUTTONS_BACKGROUND};
   border-color: ${({ theme, status, disabled }) =>
-    disabled ? theme.Colors.GRANITE : theme.Colors.INPUT_COLOR};
+    disabled ? theme.Colors.GRANITE : theme.Colors.BUTTON_COLOR};
   padding: ${vs(10)}px ${s(20)}px;
   align-items: center;
   justify-content: center;

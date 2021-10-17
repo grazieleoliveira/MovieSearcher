@@ -7,11 +7,12 @@ import createSagaMiddleware from 'redux-saga';
 import { reactotron } from '~/config/ReactotronConfig';
 
 import reducers from './ducks';
-import sagas from './sagas';
+import sagas from '~/modules/Movies/store/ducks/sagas';
 
 import { FontState } from '~/shared/store/ducks/font/types';
 import { ThemeState } from '~/shared/store/ducks/theme/types';
 import { ProfileState } from '~/modules/User/store/ducks/types';
+import { MoviesState } from '~/modules/Movies/store/ducks/types';
 // import { ProfileState } from './ducks/profile/types';
 // import { BooksState } from './ducks/books/types';
 
@@ -19,13 +20,14 @@ export interface ApplicationState {
   font: FontState;
   theme: ThemeState;
   profile: ProfileState;
-  // movies: MoviesState;
+  movies: MoviesState;
 }
 
 export const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
   debounce: 0.1,
+  blacklist: ['movies'],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);
@@ -44,7 +46,7 @@ if (process.env.NODE_ENV !== 'production' || __DEV__) {
 }
 
 export const store = createStore(persistedReducer, composed);
-// sagaMiddleware.run(sagas);
+sagaMiddleware.run(sagas);
 export const persistor = persistStore(store, null, () => {});
 
 export function startStore() {

@@ -1,6 +1,8 @@
 import { useNavigation } from '@react-navigation/core';
 import React, { PropsWithChildren } from 'react';
 import { useDispatch } from 'react-redux';
+import { getPopularMovies } from '~/modules/Movies/services/movies';
+import { getPopularMoviesAction } from '~/modules/Movies/store/ducks/actions';
 
 import {
   incrementFontSize,
@@ -31,6 +33,7 @@ export const Header: React.FC<HeaderProps> = ({ goBackToLast }) => {
         </S.Button>
       )}
       <S.ContainerFont>
+        {/* voltar para dispatch(toogleTheme() */}
         <S.Button onPress={() => dispatch(toogleTheme())}>
           <S.IconColor />
         </S.Button>

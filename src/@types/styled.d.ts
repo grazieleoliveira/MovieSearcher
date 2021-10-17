@@ -44,6 +44,13 @@ type ColorsProps = {
   SHOW_BUTTON: string;
   BUTTON_COLOR: string;
   GRAY_SCREEN: string;
+  TAB_ICON_FOCUSED: string;
+  TAB_ICON_UNFOCUSED: string;
+  SEARCH_BY_CATEGORY_TEXT: string;
+  STTS_BAR: string;
+  CATEGORY_CLICKABLE: string;
+  BUTTONS_BACKGROUND: string;
+  GO_BACK_COLOR: string;
 };
 
 type SizingProps = {
