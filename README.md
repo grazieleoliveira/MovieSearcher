@@ -25,7 +25,7 @@ In this project, I got to learn:
 <ul>
   <li>React Native</li>
   <li>Typescript</li>
-  <li>Open Trivia API</li>
+  <li>The Movie DB API</li>
 </ul>
 
 ### ⚙️ Libraries
