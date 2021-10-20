@@ -6,7 +6,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { MOVIE_INFO } from '~/shared/constants/routeNames';
 import { ApplicationState } from '~/shared/store';
 import themes from '~/shared/themes';
-import { searchMoviesAction } from '../../store/ducks/actions';
+import {
+  searchByGenreAction,
+  searchMoviesAction,
+} from '../../store/ducks/actions';
 import { renderMovie } from '../Home';
 import ModalCategories from './SearchCategoryModal';
 import * as S from './styles';
@@ -17,22 +20,53 @@ export function Search() {
     (state: ApplicationState) => state.movies,
   );
 
-  const navigation = useNavigation();
   const [textSearch, setTextSearch] = useState<string>('');
   const [modalIsVisible, setModalIsVisible] = useState(false);
+  const [page, setPage] = useState(1);
+  const [isByGenre, setIsByGenre] = useState(false);
+  const [genreId, setGenreId] = useState('');
+
+  // verificar se uma mesma query foi chamada mais de 1x
+  const [queryMore, setQueryMore] = useState(false);
+
+  const navigation = useNavigation();
   const dispatch = useDispatch();
+
   const getSearchedMovies = () => {
+    setQueryMore(false);
+    setIsByGenre(false);
     if (!loading) {
-      dispatch(searchMoviesAction(textSearch));
+      dispatch(searchMoviesAction(textSearch, '1'));
+      setPage(2);
     }
   };
 
+  const getMoreSearchedMovies = () => {
+    setQueryMore(true);
+    if (!loading) {
+      if (isByGenre) {
+        dispatch(searchByGenreAction(genreId, page.toString()));
+      } else {
+        dispatch(searchMoviesAction(textSearch, page.toString()));
+        setPage(page + 1);
+      }
+    }
+  };
   function navigateToMovie() {
     navigation.navigate(MOVIE_INFO);
   }
   const closeModal = () => {
     setModalIsVisible(false);
+    setQueryMore(true);
   };
+
+  function successCloseModal(id: string) {
+    setModalIsVisible(false);
+    setTextSearch('');
+    setIsByGenre(true);
+    setPage(2);
+    setGenreId(id);
+  }
   return (
     <S.Background>
       <S.Container>
@@ -51,17 +85,17 @@ export function Search() {
             onSubmitEditing={getSearchedMovies}
           />
         </S.SearchArea>
-        <S.SearchByGenderText
+        <S.SearchByGenreText
           onPress={() => {
             setModalIsVisible(true);
-            setTextSearch('');
+            setQueryMore(false);
           }}>
           ...ou busque por categorias
-        </S.SearchByGenderText>
-        {loading ? (
-          <S.IndicatorContainer>
+        </S.SearchByGenreText>
+        {loading && !queryMore ? (
+          <S.IndicatorContainerMovies>
             <ActivityIndicator size="large" />
-          </S.IndicatorContainer>
+          </S.IndicatorContainerMovies>
         ) : (
           <S.List
             data={searchMovies}
@@ -69,7 +103,19 @@ export function Search() {
             renderItem={(item) => renderMovie(item, navigateToMovie)}
             keyExtractor={(item: any) => item.id.toString()}
             showsVerticalScrollIndicator={false}
-            ListFooterComponent={<View style={{ height: 150 }} />}
+            ListFooterComponent={
+              loading ? (
+                <S.IndicatorContainer>
+                  <ActivityIndicator size="large" />
+                </S.IndicatorContainer>
+              ) : (
+                searchMovies[0] && (
+                  <S.TouchableFooter onPress={() => getMoreSearchedMovies()}>
+                    <S.TextFooter fontSize={16}>Load More</S.TextFooter>
+                  </S.TouchableFooter>
+                )
+              )
+            }
           />
         )}
       </S.Container>
@@ -79,7 +125,10 @@ export function Search() {
         onRequestClose={() => {
           setModalIsVisible(true);
         }}>
-        <ModalCategories closeModal={() => closeModal()} />
+        <ModalCategories
+          closeModal={() => closeModal()}
+          successCloseModal={(id) => successCloseModal(id)}
+        />
       </Modal>
     </S.Background>
   );

@@ -45,7 +45,7 @@ export interface GetPopularMoviesErrorProps extends Action {
 
 export interface SearchMoviesProps extends Action {
   type: MoviesTypes.SEARCH_MOVIES;
-  payload: { text: string };
+  payload: { text: string; page: string };
 }
 
 export interface SearchMoviesSuccessProps extends Action {
@@ -59,7 +59,7 @@ export interface SearchMoviesErrorProps extends Action {
 
 export interface SearchByGenreProps extends Action {
   type: MoviesTypes.SEARCH_BY_GENRE;
-  payload: { id: string };
+  payload: { id: string; page: string };
 }
 
 export interface SearchByGenreSuccessProps extends Action {

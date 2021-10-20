@@ -3,7 +3,6 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import NewText from '~/shared/components/Text';
 import themes from '~/shared/themes';
 import { s, vs } from '~/shared/utils/responsibleText';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export const Background = styled.View`
   flex: 1;
@@ -41,7 +40,12 @@ export const MaterialIcon = styled(Icon)`
 `;
 
 export const IndicatorContainer = styled.View`
-  padding-top: 50px;
+  height: ${s(124)}px;
+`;
+
+export const IndicatorContainerMovies = styled.View`
+  align-items: center;
+  justify-content: center;
 `;
 export const List = styled.FlatList`
   width: 100%;
@@ -51,9 +55,19 @@ export const Touchable = styled.TouchableOpacity`
   width: 100%;
 `;
 
-export const SearchByGenderText = styled(NewText)`
+export const TouchableFooter = styled.TouchableOpacity``;
+
+export const SearchByGenreText = styled(NewText)`
   font-family: Roboto-Medium;
   color: ${({ theme }) => theme.Colors.SEARCH_BY_CATEGORY_TEXT};
   padding-left: ${s(10)}px;
+  padding-bottom: ${s(10)}px;
   align-self: flex-end;
+`;
+
+export const TextFooter = styled(NewText)`
+  font-family: Roboto-Medium;
+  color: ${({ theme }) => theme.Colors.CATEGORY_CLICKABLE};
+  padding-bottom: ${s(82)}px;
+  align-self: center;
 `;

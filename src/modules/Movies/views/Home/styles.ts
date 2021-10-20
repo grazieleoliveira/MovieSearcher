@@ -18,6 +18,7 @@ export const Header = styled.View`
   width: 100%;
   justify-content: space-between;
   flex-direction: row;
+  margin-bottom: ${s(12)}px;
 `;
 export const Title = styled.Text`
   font-size: ${themes.light.Sizes.FONTSIZE_TITLE};
@@ -87,7 +88,7 @@ export const List = styled.FlatList`
 `;
 
 export const BookView = styled.TouchableOpacity`
-  padding: 20px 10px 20px 10px;
+  padding: 10px 10px 20px 10px;
   width: 100%;
 `;
 
@@ -129,5 +130,17 @@ export const ButtonContainer = styled.TouchableOpacity`
 `;
 
 export const IndicatorContainer = styled.View`
-  padding-top: 50px;
+  height: ${s(72)}px;
+`;
+
+export const IndicatorContainerMovies = styled.View`
+  align-items: center;
+  justify-content: center;
+`;
+
+export const TextFooter = styled(NewText)`
+  font-family: Roboto-Medium;
+  color: ${({ theme }) => theme.Colors.CATEGORY_CLICKABLE};
+  padding-bottom: ${s(50)}px;
+  align-self: center;
 `;

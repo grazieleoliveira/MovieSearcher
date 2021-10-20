@@ -27,8 +27,10 @@ export const getPopularMoviesSuccessAction = (
 export const getPopularMoviesErrorAction = (): GetPopularMoviesErrorProps =>
   action(MoviesTypes.GET_POPULAR_MOVIES_ERROR);
 
-export const searchMoviesAction = (text: string): SearchMoviesProps =>
-  action(MoviesTypes.SEARCH_MOVIES, { text });
+export const searchMoviesAction = (
+  text: string,
+  page: string,
+): SearchMoviesProps => action(MoviesTypes.SEARCH_MOVIES, { text, page });
 
 export const searchMoviesSuccessAction = (
   searchMovies: MovieInfoProps,
@@ -38,8 +40,10 @@ export const searchMoviesSuccessAction = (
 export const searchMoviesErrorAction = (): SearchMoviesErrorProps =>
   action(MoviesTypes.SEARCH_MOVIES_ERROR);
 
-export const searchByGenreAction = (id: string): SearchByGenreProps =>
-  action(MoviesTypes.SEARCH_BY_GENRE, { id });
+export const searchByGenreAction = (
+  id: string,
+  page: string,
+): SearchByGenreProps => action(MoviesTypes.SEARCH_BY_GENRE, { id, page });
 
 export const searchByGenreSuccessAction = (
   searchMovies: MovieInfoProps,
@@ -59,13 +63,3 @@ export const getMovieByIdSuccessAction = (
 
 export const getMovieByIdErrorAction = (): GetMovieByIdErrorProps =>
   action(MoviesTypes.GET_MOVIE_BY_ID_ERROR);
-// export const getBookInfoAction = (id: string): GetBookInfoProps =>
-//   action(BooksTypes.GET_BOOK_INFO, { id });
-
-// export const getBookInfoSuccessAction = (
-//   book: BookInfo,
-// ): GetBookInfoSuccessProps =>
-//   action(BooksTypes.GET_BOOK_INFO_SUCCESS, { book });
-
-// export const getBookInfoErrorAction = (): GetBookInfoErrorProps =>
-//   action(BooksTypes.GET_BOOK_INFO_ERROR);

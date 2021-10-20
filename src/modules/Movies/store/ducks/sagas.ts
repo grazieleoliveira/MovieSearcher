@@ -1,9 +1,9 @@
-import { all, takeLatest, call, put } from 'redux-saga/effects';
+import { all, takeLatest, call, put, select } from 'redux-saga/effects';
 
 import {
   getPopularMovies,
   searchMovieById,
-  searchMovies,
+  searchMovie,
   searchMoviesByGenre,
 } from '~/modules/Movies/services/movies';
 
@@ -25,6 +25,7 @@ import {
   getMovieByIdSuccessAction,
   getMovieByIdErrorAction,
 } from './actions';
+import { ApplicationState } from '~/shared/store';
 
 export interface ResponseGenerator {
   config?: any;
@@ -42,9 +43,17 @@ function* getPopularMoviesSagas(action: GetPopularMoviesProps) {
     );
 
     if (response.status >= 200 && response.status < 300) {
-      // const {listBooks} = yield select((state: ApplicationState) => state.books);
-      // const moreBooks = [...listBooks, ...response.data.items];
-      yield put(getPopularMoviesSuccessAction(response.data.results));
+      const { listMovies } = yield select(
+        (state: ApplicationState) => state.movies,
+      );
+      let moreMovies = [];
+
+      if (action.payload.page === '1') {
+        moreMovies = response.data.results;
+      } else {
+        moreMovies = [...listMovies, ...response.data.results];
+      }
+      yield put(getPopularMoviesSuccessAction(moreMovies));
     } else {
       yield put(getPopularMoviesErrorAction());
     }
@@ -56,14 +65,23 @@ function* getPopularMoviesSagas(action: GetPopularMoviesProps) {
 function* searchMoviesSagas(action: SearchMoviesProps) {
   try {
     const response: ResponseGenerator = yield call(
-      searchMovies,
+      searchMovie,
       action.payload.text,
+      action.payload.page,
     );
 
     if (response.status >= 200 && response.status < 300) {
-      // const {listBooks} = yield select((state: ApplicationState) => state.books);
-      // const moreBooks = [...listBooks, ...response.data.items];
-      yield put(searchMoviesSuccessAction(response.data.results));
+      const { searchMovies } = yield select(
+        (state: ApplicationState) => state.movies,
+      );
+      let moreMovies = [];
+
+      if (action.payload.page === '1') {
+        moreMovies = response.data.results;
+      } else {
+        moreMovies = [...searchMovies, ...response.data.results];
+      }
+      yield put(searchMoviesSuccessAction(moreMovies));
     } else {
       yield put(searchMoviesErrorAction());
     }
@@ -77,12 +95,21 @@ function* searchByGenreSagas(action: SearchByGenreProps) {
     const response: ResponseGenerator = yield call(
       searchMoviesByGenre,
       action.payload.id,
+      action.payload.page,
     );
 
     if (response.status >= 200 && response.status < 300) {
-      // const {listBooks} = yield select((state: ApplicationState) => state.books);
-      // const moreBooks = [...listBooks, ...response.data.items];
-      yield put(searchByGenreSuccessAction(response.data.results));
+      const { searchMovies } = yield select(
+        (state: ApplicationState) => state.movies,
+      );
+      let moreMovies = [];
+
+      if (action.payload.page === '1') {
+        moreMovies = response.data.results;
+      } else {
+        moreMovies = [...searchMovies, ...response.data.results];
+      }
+      yield put(searchByGenreSuccessAction(moreMovies));
     } else {
       yield put(searchByGenreErrorAction());
     }

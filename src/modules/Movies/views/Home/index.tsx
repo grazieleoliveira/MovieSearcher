@@ -21,28 +21,32 @@ export const renderMovie = ({ item }, navigate) => {
   };
 
   let banana;
-  return (
-    <S.BookView onPress={() => getMovie(item)} activeOpacity={0.7}>
-      <S.ImageInfoContainer>
-        <S.ImageBook
-          source={{
-            uri: `https://image.tmdb.org/t/p/w500/${item.poster_path}`,
-          }}
-        />
-        <S.TitleDescriptionContainer>
-          <S.NewTitle numberOfLines={1} fontSize={20}>
-            {item.title}
-          </S.NewTitle>
-          <S.PublishedDate numberOfLines={1} fontSize={12}>
-            {item.release_date ? item.release_date : 'Unknown date'}
-          </S.PublishedDate>
-          <S.Description numberOfLines={4} fontSize={13}>
-            {item.overview ? item.overview : 'No description'}
-          </S.Description>
-        </S.TitleDescriptionContainer>
-      </S.ImageInfoContainer>
-    </S.BookView>
-  );
+  if (item.poster_path !== null) {
+    return (
+      <S.BookView onPress={() => getMovie(item)} activeOpacity={0.7}>
+        <S.ImageInfoContainer>
+          <S.ImageBook
+            source={{
+              uri: `https://image.tmdb.org/t/p/w500/${item.poster_path}`,
+            }}
+          />
+          <S.TitleDescriptionContainer>
+            <S.NewTitle numberOfLines={1} fontSize={20}>
+              {item.title}
+            </S.NewTitle>
+            <S.PublishedDate numberOfLines={1} fontSize={12}>
+              {item.release_date ? item.release_date : 'Unknown date'}
+            </S.PublishedDate>
+            <S.Description numberOfLines={4} fontSize={13}>
+              {item.overview ? item.overview : 'No description'}
+            </S.Description>
+          </S.TitleDescriptionContainer>
+        </S.ImageInfoContainer>
+      </S.BookView>
+    );
+  }
+
+  return null;
 };
 
 export function Home() {
@@ -67,20 +71,17 @@ export function Home() {
 
   // fazer paginacao se sobrar tempo
   useEffect(() => {
+    if (page === 1) {
+      dispatch(getPopularMoviesAction(page.toString()));
+      setPage(page + 1);
+    }
+  }, [dispatch, page]);
+
+  const getPopularMovies = () => {
     dispatch(getPopularMoviesAction(page.toString()));
-  }, [dispatch]);
-
+    setPage(page + 1);
+  };
   console.tron.log('LISTMOVIES', listMovies);
-  // const getBooks = () => {
-  //   if (!loading) {
-  //     dispatch(getBooksAction(textSearch));
-  //   }
-  // };
-
-  // const getBook = (item: BookInfo) => {
-  //   dispatch(getBookInfoAction(item.id));
-  //   navigation.navigate(BOOK_INFO, { item });
-  // };
 
   return (
     <S.Background>
@@ -93,10 +94,10 @@ export function Home() {
             )}
           </S.ProfileIcon>
         </S.Header>
-        {loading ? (
-          <S.IndicatorContainer>
+        {loading && page === 1 ? (
+          <S.IndicatorContainerMovies>
             <ActivityIndicator size="large" />
-          </S.IndicatorContainer>
+          </S.IndicatorContainerMovies>
         ) : (
           <S.List
             data={listMovies}
@@ -104,7 +105,17 @@ export function Home() {
             renderItem={(item) => renderMovie(item, navigateToMovie)}
             keyExtractor={(item: any) => item.id.toString()}
             showsVerticalScrollIndicator={false}
-            ListFooterComponent={<View style={{ height: 150 }} />}
+            ListFooterComponent={
+              loading ? (
+                <S.IndicatorContainer>
+                  <ActivityIndicator size="large" />
+                </S.IndicatorContainer>
+              ) : (
+                <S.Touchable onPress={() => getPopularMovies()}>
+                  <S.TextFooter fontSize={16}>Load More</S.TextFooter>
+                </S.Touchable>
+              )
+            }
           />
         )}
       </S.Container>

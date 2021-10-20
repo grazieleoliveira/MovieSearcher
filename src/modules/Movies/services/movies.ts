@@ -16,18 +16,24 @@ export const getPopularMovies = async (page: string) => {
   }
 };
 
-export const searchMovies = async (text: string) => {
+export const searchMovie = async (text: string, page: string) => {
   try {
-    const response = await request.get(SEARCH_PATH, `query=${text}`);
+    const response = await request.get(
+      SEARCH_PATH,
+      `query=${text}&page=${page}`,
+    );
     return response;
   } catch {
     return null;
   }
 };
 
-export const searchMoviesByGenre = async (id: string) => {
+export const searchMoviesByGenre = async (id: string, page: string) => {
   try {
-    const response = await request.get(GENRES_PATH, `with_genres=${id}`);
+    const response = await request.get(
+      GENRES_PATH,
+      `with_genres=${id}&page=${page}`,
+    );
     return response;
   } catch {
     return null;

@@ -14,18 +14,20 @@ import * as S from './styles';
 
 interface ModalCategoriesProps {
   closeModal: () => void;
+  successCloseModal: (id) => void;
 }
 
-const ModalCategories: React.FC<ModalCategoriesProps> = ({ closeModal }) => {
+const ModalCategories: React.FC<ModalCategoriesProps> = ({
+  closeModal,
+  successCloseModal,
+}) => {
   const dispatch = useDispatch();
 
   const renderGenre = ({ item }) => {
     const searchByGenre = (id: number) => {
-      dispatch(searchByGenreAction(id.toString()));
-      closeModal();
+      dispatch(searchByGenreAction(id.toString(), '1'));
+      successCloseModal(id.toString());
     };
-    let abc;
-    console.tron.log('ITEM', item);
     return (
       <S.CategoryTitle onPress={() => searchByGenre(item.id)}>
         {item.name}
