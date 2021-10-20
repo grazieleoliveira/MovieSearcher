@@ -5,22 +5,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { MOVIE_INFO, PROFILE } from '~/shared/constants/routeNames';
 import movies, { ApplicationState } from '~/shared/store';
 
-import themes from '~/shared/themes';
 import {
   getMovieByIdAction,
   getPopularMoviesAction,
-  searchMoviesAction,
 } from '~/modules/Movies/store/ducks/actions';
 import * as S from './styles';
-import { MovieInfoProps } from '../../dtos';
 
-export const renderMovie = ({ item }, navigate) => {
+export const renderMovie = ({ item },  navigate) => {
   const getMovie = (item) => {
     movies.dispatch(getMovieByIdAction(item.id.toString()));
     navigate();
   };
 
-  let banana;
   if (item.poster_path !== null) {
     return (
       <S.BookView onPress={() => getMovie(item)} activeOpacity={0.7}>

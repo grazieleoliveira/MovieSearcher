@@ -1,20 +1,13 @@
 import React from 'react';
-import {
-  FlatList,
-  TouchableWithoutFeedback,
-} from 'react-native-gesture-handler';
 import { useDispatch } from 'react-redux';
-import {
-  searchByGenreAction,
-  searchMoviesAction,
-} from '~/modules/Movies/store/ducks/actions';
-import { GENRES, GenresProps } from '../categoryList';
+import { searchByGenreAction } from '~/modules/Movies/store/ducks/actions';
+import { GENRES } from '../categoryList';
 
 import * as S from './styles';
 
 interface ModalCategoriesProps {
   closeModal: () => void;
-  successCloseModal: (id) => void;
+  successCloseModal: (id: string) => void;
 }
 
 const ModalCategories: React.FC<ModalCategoriesProps> = ({

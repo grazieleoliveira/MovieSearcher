@@ -60,6 +60,11 @@ export function Search() {
     setQueryMore(true);
   };
 
+  // depois que a action é despachada no modal, essa função é chamada. ela limpa o input que o usuario possa ter botado numa busca anterior
+  // além disso, seta o hook isByGenre como true para fazer a identificação na hora de chamar a função de carregar mais filmes
+  // o hook "page" é setado como 2 pq dps que a action é despachada pela primeira vez no modal ele já chama com pag 1, então aqui eu setei pra 2 para quando
+  // chamarem a pagina ela já estiver como 2, tornando possivel a paginaçao
+  // e por fim o hook genreId é setado pra quando formos chamar a action de pesquisa por genero novamente
   function successCloseModal(id: string) {
     setModalIsVisible(false);
     setTextSearch('');
