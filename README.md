@@ -1,5 +1,5 @@
 <h1 align="center">
-  Quiz Time
+  Movie Searcher
 </h1>
 
 <p align="center">
