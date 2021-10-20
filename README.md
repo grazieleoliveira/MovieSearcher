@@ -14,7 +14,9 @@ This is the fifth project of the Lead Dell mentoring program. The application ha
 - Search for a movie
 - Search for the popular movies of a given category
 - Login/Logout
-- Change user profile
+- Update user profile
+- Change font size
+- Light Mode/Bright Mode
 
 ### 🏆 My accomplishments
 In this project, I got to learn:
